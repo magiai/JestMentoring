@@ -1,0 +1,2 @@
+{"/Users/dadamska/projects/JestMentoring/src/app/index.ts": {"path":"/Users/dadamska/projects/JestMentoring/src/app/index.ts","statementMap":{"0":{"start":{"line":2,"column":4},"end":{"line":2,"column":78}}},"fnMap":{"0":{"name":"App","decl":{"start":{"line":1,"column":24},"end":{"line":1,"column":27}},"loc":{"start":{"line":1,"column":30},"end":{"line":3,"column":1}},"line":1}},"branchMap":{},"s":{"0":1},"f":{"0":1},"b":{},"_coverageSchema":"1a1c01bbd47fc00a2c39e90264f33305004495a9","hash":"285bc7d4f8e0f079225d415fc7d19daaa2af4e4c"}
+}
