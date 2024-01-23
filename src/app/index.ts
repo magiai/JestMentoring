@@ -23,9 +23,11 @@ export default function App() {
         return listItem
     }
 
-    const handleRemovingListItem = (id: number) => {
-        const tasks = document.querySelectorAll('.list li');
+    const handleRemovingListItem = async (id: number) => {
+        await deleteTodoItem(id);
+        console.log(`Deleted to-do item with ID ${id}`);
 
+        const tasks = document.querySelectorAll('.list li');
         tasks.forEach(task => {
             if (task.getAttribute('data-id') === String(id)) task.remove();
         })
@@ -34,11 +36,7 @@ export default function App() {
     const createDeleteButton = (id: number): HTMLElement => {
         const deleteButton = document.createElement('button');
         deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click', async () => {
-            await deleteTodoItem(id);
-            console.log(`Deleted to-do item with ID ${id}`);
-            handleRemovingListItem(id);
-        });
+        deleteButton.addEventListener('click',  () => handleRemovingListItem(id));
 
         return deleteButton;
     }
@@ -58,6 +56,7 @@ export default function App() {
     const handleAddingListItem = async (event: any) => {
         event.preventDefault();
         const task = (<HTMLInputElement>document.getElementById('task'))?.value;
+
         if (task) {
             const newRecord = await addTodoItem(task);
             const { id, title, completed } = newRecord;
