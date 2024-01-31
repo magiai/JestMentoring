@@ -3,8 +3,7 @@ import fetchTodoList from "./fetchTodoList";
 import addTodoItem from './addTodoItem';
 import createListItem from './createListItem';
 
-export default function App() {
-    // document.body.innerHTML = '<div id="test" data-testid="testId">test</div>'
+const App = async () => {
     const listContainer = document.querySelector('.list');
     const newTodoForm = document.querySelector('#newTaskForm');
 
@@ -26,14 +25,14 @@ export default function App() {
             const { id, title, completed } = todo;
             const listItem = createListItem({id, title, completed});
             console.log(listItem.dataset.testid);
-            listContainer.append(listItem);
+            listContainer?.append(listItem);
+            console.log('appendeed item');
         });
     };
 
     newTodoForm?.addEventListener('submit', (event) => handleAddingListItem(event));
 
-    renderTodoList();
-
-    console.log(document.querySelectorAll('li'));
+    await renderTodoList();
 }
 
+export default App;

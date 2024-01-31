@@ -1,5 +1,5 @@
 import App from "../";
-import { getByTestId } from '@testing-library/dom';
+import { getByTestId, within, screen } from '@testing-library/dom';
 
 jest.mock('../fetchTodoList', () => {
     return () => {
@@ -21,11 +21,10 @@ describe('app works', () => {
         listContainer.classList.add('list');
         document.body.append(listContainer);
     });
-
-    it('calls the application', () => {
+    
+    it('calls the application', async () => {
         const app = App();
-        console.log(document.querySelector('.list'));
-        expect(getByTestId(document.body, mockData[0].userId)).toBeInTheDocument(true);
+        await screen.findByTestId(mockData[0].userId);
     });
 
 });
