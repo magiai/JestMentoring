@@ -1,8 +1,6 @@
 import deleteTodoItem from './deleteTodoItem';
 
 export const handleRemovingListItem = async (id: number) => {
-    console.log(123);
-    return null;
     await deleteTodoItem(id);
     console.log(`Deleted to-do item with ID ${id}`);
 
@@ -15,7 +13,8 @@ export const handleRemovingListItem = async (id: number) => {
 const createDeleteButton = (id: number): HTMLElement => {
     const deleteButton = document.createElement('button');
     deleteButton.innerText = 'Delete';
-    deleteButton.dataset.testid = `${id}_delete_button`;
+    deleteButton.dataset.id = `${id}`;
+    deleteButton.dataset.testid = `${id}_delete-button`;
     deleteButton.addEventListener('click',  () => handleRemovingListItem(id));
 
     return deleteButton;

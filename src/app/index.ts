@@ -25,12 +25,15 @@ export default function App() {
         todos?.forEach(todo => {
             const { id, title, completed } = todo;
             const listItem = createListItem({id, title, completed});
-            listContainer?.append(listItem);
+            console.log(listItem.dataset.testid);
+            listContainer.append(listItem);
         });
     };
 
     newTodoForm?.addEventListener('submit', (event) => handleAddingListItem(event));
 
     renderTodoList();
+
+    console.log(document.querySelectorAll('li'));
 }
 

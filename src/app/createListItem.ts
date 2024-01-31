@@ -12,9 +12,10 @@ const createListItem = ({
         Title: ${title}
         Completed: ${completed}
         `
+    listItem.dataset.id = `${id}`;
     listItem.dataset.testid = `${id}`;
-        const deleteButton = createDeleteButton(id);
-        listItem.append(deleteButton)
+    const deleteButton = createDeleteButton(id);
+    listItem.append(deleteButton)
 
     return listItem
 }
