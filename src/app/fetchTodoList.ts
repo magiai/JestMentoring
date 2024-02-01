@@ -8,6 +8,8 @@ const fetchTodoList = async (): Promise<TodoList[] | void>=> {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/todos?userId=1')
         const toDoListJson = await response.json();
+        console.log(toDoListJson)
+
         return toDoListJson;
     } 
     catch(error) {

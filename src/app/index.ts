@@ -1,57 +1,11 @@
 import { TodoListItem } from './interfaces';
 import fetchTodoList from "./fetchTodoList";
 import addTodoItem from './addTodoItem';
-import deleteTodoItem from './deleteTodoItem';
+import createListItem from './createListItem';
 
-export default function App() {
-    // document.body.innerHTML = '<div id="test" data-testid="testId">test</div>'
+const App = async () => {
     const listContainer = document.querySelector('.list');
     const newTodoForm = document.querySelector('#newTaskForm');
-
-    const createListItem = ({
-        id, 
-        title,
-        completed
-    }: TodoListItem): HTMLElement  => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            ID: ${id}
-            Title: ${title}
-            Completed: ${completed}
-            `
-        listItem.dataset.id = `${id}`;
-        return listItem
-    }
-
-    const handleRemovingListItem = async (id: number) => {
-        await deleteTodoItem(id);
-        console.log(`Deleted to-do item with ID ${id}`);
-
-        const tasks = document.querySelectorAll('.list li');
-        tasks.forEach(task => {
-            if (task.getAttribute('data-id') === String(id)) task.remove();
-        })
-    }
-    
-    const createDeleteButton = (id: number): HTMLElement => {
-        const deleteButton = document.createElement('button');
-        deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click',  () => handleRemovingListItem(id));
-
-        return deleteButton;
-    }
-
-    const prepareListItem = ({
-        id, 
-        title,
-        completed
-    }: TodoListItem) => {
-        const listItem = createListItem({id, title, completed});
-        const deleteButton = createDeleteButton(id);
-        listItem.append(deleteButton)
-
-        return listItem;
-    }
 
     const handleAddingListItem = async (event: any) => {
         event.preventDefault();
@@ -60,7 +14,7 @@ export default function App() {
         if (task) {
             const newRecord = await addTodoItem(task);
             const { id, title, completed } = newRecord;
-            const newTask = prepareListItem({id, title, completed});
+            const newTask = createListItem({id, title, completed});
             listContainer?.append(newTask)
         }
     }
@@ -69,13 +23,16 @@ export default function App() {
         const todos = await fetchTodoList();
         todos?.forEach(todo => {
             const { id, title, completed } = todo;
-            const listItem = prepareListItem({id, title, completed});
+            const listItem = createListItem({id, title, completed});
+            console.log(listItem.dataset.testid);
             listContainer?.append(listItem);
+            console.log('appendeed item');
         });
     };
 
     newTodoForm?.addEventListener('submit', (event) => handleAddingListItem(event));
 
-    renderTodoList();
+    await renderTodoList();
 }
 
+export default App;
