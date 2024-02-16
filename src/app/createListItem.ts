@@ -1,5 +1,6 @@
 import { TodoListItem } from './interfaces';
 import createDeleteButton from './createDeleteButton';
+import createEditButton from './createEditButton';
 
 const createListItem = ({
     id, 
@@ -14,6 +15,10 @@ const createListItem = ({
         `
     listItem.dataset.id = `${id}`;
     listItem.dataset.testid = `${id}`;
+
+    const editButton = createEditButton(id);
+    listItem.append(editButton);
+
     const deleteButton = createDeleteButton(id);
     listItem.append(deleteButton)
 
