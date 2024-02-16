@@ -1,5 +1,7 @@
 import App from "../";
-import { getByTestId, within, screen } from '@testing-library/dom';
+import { screen, waitFor, getByTestId } from '@testing-library/dom';
+
+//remember to break the test with the opposite value
 
 jest.mock('../fetchTodoList', () => {
     return () => {
@@ -14,7 +16,7 @@ const mockData = [{
     "completed": false
 }];
 
-describe('app works', () => {
+describe('application with to-do list is initialized', () => {
     beforeEach(() => {
         //it should be created here as it's in the html file, not created in js
         const listContainer = document.createElement('ul');
@@ -22,9 +24,12 @@ describe('app works', () => {
         document.body.append(listContainer);
     });
     
-    it('calls the application', async () => {
-        const app = App();
-        await screen.findByTestId(mockData[0].userId);
+    it('checks if to-do list is populated with data', async () => {
+        const app = await App();
+        console.log(123123, getByTestId(document.body, mockData[0].userId));
+        // await screen.findByTestId(mockData[0].userId);
+        expect(getByTestId(document.body, mockData[0].userId)).toBeInTheDocument();
+        expect(getByTestId(document.body, mockData[0].id).textContent).toContain(`ID: ${mockData[0].id}`);
     });
 
 });
