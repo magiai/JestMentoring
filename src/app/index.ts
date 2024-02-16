@@ -24,9 +24,7 @@ const App = async () => {
         todos?.forEach(todo => {
             const { id, title, completed } = todo;
             const listItem = createListItem({id, title, completed});
-            console.log(listItem.dataset.testid);
             listContainer?.append(listItem);
-            console.log('appendeed item');
         });
     };
 
