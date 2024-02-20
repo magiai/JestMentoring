@@ -1,5 +1,11 @@
 import deleteTodoItem from './deleteTodoItem';
 
+export const showDeleteMessage = (taskId: number) => {
+    setTimeout(() => {
+        alert(`Your task ${taskId} has been deleted!`);
+    }, 1000)
+}
+
 export const handleRemovingListItem = async (id: number) => {
     await deleteTodoItem(id);
     console.log(`Deleted to-do item with ID ${id}`);
@@ -8,6 +14,8 @@ export const handleRemovingListItem = async (id: number) => {
     tasks.forEach(task => {
         if (task.getAttribute('data-id') === String(id)) task.remove();
     })
+
+    showDeleteMessage(id);
 }
 
 const createDeleteButton = (id: number): HTMLElement => {
